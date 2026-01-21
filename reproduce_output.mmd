@@ -1,0 +1,100 @@
+---
+title: Cloud-Native SaaS Architecture
+---
+graph LR
+
+    %% Configuration for better rendering
+    %%{init: {'flowchart': {'useMaxWidth': true, 'htmlLabels': true}}}%%
+
+    subgraph presentation [ UI/Frontend ]
+        react_frontend["<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>React / Next.js Frontend"]
+    end
+
+    subgraph infrastructure [ Infrastructure ]
+        cloudfront_cdn["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>AWS CloudFront CDN"]
+        waf["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>Web Application Firewall"]
+        alb["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>Application Load Balancer"]
+        kubernetes_cluster["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>Kubernetes Cluster (EKS)"]
+        kafka_cluster["<img src='https://icons.terrastruct.com/gcp%2FProducts%20and%20services%2FData%20Analytics%2FCloud%20Dataproc.svg' width='48'/><br/>Kafka Cluster"]
+        lambda_functions["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>AWS Lambda"]
+        secrets_manager["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>AWS Secrets Manager"]
+        cloudwatch["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>AWS CloudWatch"]
+        cicd_pipeline["<img src='https://icons.terrastruct.com/aws%2FManagement%20&%20Governance%2FAWS-CloudFormation.svg' width='48'/><br/>CI/CD Pipeline"]
+    end
+
+    subgraph data [ Data Layer ]
+        s3_static_assets["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>S3 Static Assets"]
+        postgres_primary["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>PostgreSQL Primary"]
+        postgres_replica["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>PostgreSQL Read Replica"]
+        redis_cache["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>Redis Cluster"]
+        elasticsearch["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>Elasticsearch"]
+        s3_user_data["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>S3 User Data"]
+    end
+
+    subgraph application [ Services ]
+        api_gateway["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>API Gateway"]
+        auth_service["<img src='https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg' width='48'/><br/>Auth Service"]
+        user_service["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>User Service"]
+        billing_service["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>Billing Service"]
+        notification_service["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud9.svg' width='48'/><br/>Notification Service"]
+        ai_service["<img src='https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Cloud-Development-Kit_light-bg.svg' width='48'/><br/>AI Service"]
+    end
+    react_frontend -->|HTTPS| cloudfront_cdn
+    cloudfront_cdn -->|Fetch Assets| s3_static_assets
+    react_frontend -->|REST/GraphQL| api_gateway
+    api_gateway -->|Traffic Filter| waf
+    waf -->|Forward Traffic| alb
+    alb -->|Route| auth_service
+    alb -->|Route| user_service
+    alb -->|Route| billing_service
+    alb -->|Route| notification_service
+    alb -->|Route| ai_service
+    auth_service -->|Get Secrets| secrets_manager
+    user_service -->|Get Secrets| secrets_manager
+    billing_service -->|Get Secrets| secrets_manager
+    notification_service -->|Get Secrets| secrets_manager
+    auth_service -->|Write Data| postgres_primary
+    auth_service -->|Read Data| postgres_replica
+    user_service -->|Write Data| postgres_primary
+    user_service -->|Read Data| postgres_replica
+    user_service -->|Cache/Retrieve| redis_cache
+    user_service -->|Search Index| elasticsearch
+    billing_service -->|Transaction Log| postgres_primary
+    notification_service -->|Publish Event| kafka_cluster
+    kafka_cluster -->|Consume Event| notification_service
+    notification_service -->|Request Analysis| ai_service
+    ai_service -->|Trigger| lambda_functions
+    ai_service -->|Read/Write Models| s3_user_data
+    postgres_primary -->|Data Replication| postgres_replica
+    auth_service -->|Logs/Metrics| cloudwatch
+    user_service -->|Logs/Metrics| cloudwatch
+    billing_service -->|Logs/Metrics| cloudwatch
+    notification_service -->|Logs/Metrics| cloudwatch
+    ai_service -->|Logs/Metrics| cloudwatch
+    alb -->|Logs/Metrics| cloudwatch
+    api_gateway -->|Logs/Metrics| cloudwatch
+    cicd_pipeline -->|Deploy| kubernetes_cluster
+
+    %% Node Styling (critical path emphasized)
+    style react_frontend fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#1976d2
+    style cloudfront_cdn fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style s3_static_assets fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style api_gateway fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2
+    style waf fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style alb fill:#fff3e0,stroke:#f57c00,stroke-width:3px,color:#f57c00
+    style kubernetes_cluster fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style auth_service fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2
+    style user_service fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2
+    style billing_service fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2
+    style notification_service fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2
+    style ai_service fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2
+    style postgres_primary fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style postgres_replica fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style redis_cache fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style elasticsearch fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style kafka_cluster fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style lambda_functions fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style s3_user_data fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#388e3c
+    style secrets_manager fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00
+    style cloudwatch fill:#fff3e0,stroke:#f57c00,stroke-width:3px,color:#f57c00
+    style cicd_pipeline fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#f57c00

@@ -1,0 +1,595 @@
+{
+  "json_ir": {
+    "version": "1.0",
+    "diagram_metadata": {
+      "type": "architecture",
+      "direction": "LR",
+      "title": "Lead Management for Automobile Dealership Research"
+    },
+    "nodes": [
+      {
+        "id": "actor_customer",
+        "label": "Customer",
+        "technology": "User",
+        "layer": "Actor",
+        "description": "End-user submitting inquiries via web or in-store.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "actor_sales_rep",
+        "label": "Sales Representative",
+        "technology": "User",
+        "layer": "Actor",
+        "description": "User receiving leads and updating status via mobile.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "actor_sales_manager",
+        "label": "Sales Manager",
+        "technology": "User",
+        "layer": "Actor",
+        "description": "User monitoring performance via dashboard.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ext_erp",
+        "label": "ERP System",
+        "technology": "Legacy ERP",
+        "layer": "Infrastructure",
+        "description": "External system providing vehicle inventory data.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ext_call_center",
+        "label": "Call Center System",
+        "technology": "Telephony API",
+        "layer": "Infrastructure",
+        "description": "External system generating voice-based leads.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ext_marketing_analytics",
+        "label": "Marketing Analytics System",
+        "technology": "BI Tool",
+        "layer": "Infrastructure",
+        "description": "External system consuming sales data for analysis.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ui_web_portal",
+        "label": "Web Portal",
+        "technology": "React",
+        "layer": "Presentation",
+        "description": "Management dashboard for analytics and reporting.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ui_public_site",
+        "label": "Public Website",
+        "technology": "React",
+        "layer": "Presentation",
+        "description": "Customer-facing lead capture forms.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ui_in_store_kiosk",
+        "label": "In-store Terminal",
+        "technology": "React",
+        "layer": "Presentation",
+        "description": "Kiosk for capturing walk-in customer leads.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "ui_mobile_app",
+        "label": "Mobile App",
+        "technology": "iOS/Android",
+        "layer": "Presentation",
+        "description": "App for sales reps to manage leads and receive alerts.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "svc_lead_capture",
+        "label": "Lead Capture Service",
+        "technology": "Node.js",
+        "layer": "Application",
+        "description": "Ingests leads from web, call center, and in-store.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "svc_lead_assignment",
+        "label": "Lead Assignment Service",
+        "technology": "Node.js",
+        "layer": "Application",
+        "description": "Auto-assigns leads based on location and workload.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "svc_lead_management",
+        "label": "Lead Management API",
+        "technology": "Node.js",
+        "layer": "Application",
+        "description": "Core CRUD operations for lead status and history.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "svc_notification",
+        "label": "Notification Service",
+        "technology": "Node.js/WebSockets",
+        "layer": "Application",
+        "description": "Handles real-time reminders and alerts.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "svc_reporting",
+        "label": "Reporting Service",
+        "technology": "Node.js",
+        "layer": "Application",
+        "description": "Generates daily reports and aggregates metrics.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "db_postgres",
+        "label": "PostgreSQL Database",
+        "technology": "PostgreSQL",
+        "layer": "Data",
+        "description": "Primary storage for leads, customers, and interactions.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      },
+      {
+        "id": "cache_redis",
+        "label": "Redis Cache",
+        "technology": "Redis",
+        "layer": "Data",
+        "description": "Caching layer for real-time updates and session management.",
+        "icon_url": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "shape_type": "image"
+      }
+    ],
+    "edges": [
+      {
+        "from": "actor_customer",
+        "to": "ui_public_site",
+        "label": "Submit Inquiry",
+        "type": "unidirectional"
+      },
+      {
+        "from": "ext_call_center",
+        "to": "svc_lead_capture",
+        "label": "Push Lead Data",
+        "type": "unidirectional"
+      },
+      {
+        "from": "ui_public_site",
+        "to": "svc_lead_capture",
+        "label": "Submit Form",
+        "type": "unidirectional"
+      },
+      {
+        "from": "ui_in_store_kiosk",
+        "to": "svc_lead_capture",
+        "label": "Enter Lead",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_capture",
+        "to": "db_postgres",
+        "label": "Persist Lead (REQ001)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_capture",
+        "to": "svc_lead_assignment",
+        "label": "Trigger Assignment",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_assignment",
+        "to": "ext_erp",
+        "label": "Query Inventory/Location (REQ002)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_assignment",
+        "to": "db_postgres",
+        "label": "Update Assignment (REQ002)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_assignment",
+        "to": "svc_notification",
+        "label": "Schedule Reminder",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_notification",
+        "to": "cache_redis",
+        "label": "Queue Alert",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_notification",
+        "to": "ui_mobile_app",
+        "label": "Push Notification (REQ003)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "actor_sales_rep",
+        "to": "ui_mobile_app",
+        "label": "Update Status",
+        "type": "unidirectional"
+      },
+      {
+        "from": "ui_mobile_app",
+        "to": "svc_lead_management",
+        "label": "Update Lead (REQ005)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_lead_management",
+        "to": "db_postgres",
+        "label": "Save Interaction History (REQ005)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_reporting",
+        "to": "db_postgres",
+        "label": "Aggregate Metrics (REQ004)",
+        "type": "unidirectional"
+      },
+      {
+        "from": "svc_reporting",
+        "to": "ext_marketing_analytics",
+        "label": "Sync Data",
+        "type": "unidirectional"
+      },
+      {
+        "from": "actor_sales_manager",
+        "to": "ui_web_portal",
+        "label": "View Dashboard",
+        "type": "unidirectional"
+      },
+      {
+        "from": "ui_web_portal",
+        "to": "svc_reporting",
+        "label": "Request Report",
+        "type": "unidirectional"
+      }
+    ]
+  },
+  "mermaid": "---\ntitle: Lead Management for Automobile Dealership Research\n---\ngraph LR\n\n    %% Configuration for better rendering\n    %%{init: {'flowchart': {'useMaxWidth': true, 'htmlLabels': true}}}%%\n\n    subgraph Actor [ Actor ]\n        actor_customer[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Customer\"]\n        actor_sales_rep[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Sales Representative\"]\n        actor_sales_manager[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Sales Manager\"]\n    end\n\n    subgraph Infrastructure [ Infrastructure ]\n        ext_erp[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>ERP System\"]\n        ext_call_center[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Call Center System\"]\n        ext_marketing_analytics[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Marketing Analytics System\"]\n    end\n\n    subgraph Presentation [ Presentation ]\n        ui_web_portal[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Web Portal\"]\n        ui_public_site[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Public Website\"]\n        ui_in_store_kiosk[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>In-store Terminal\"]\n        ui_mobile_app[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Mobile App\"]\n    end\n\n    subgraph Application [ Application ]\n        svc_lead_capture[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Lead Capture Service\"]\n        svc_lead_assignment[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Lead Assignment Service\"]\n        svc_lead_management[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Lead Management API\"]\n        svc_notification[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Notification Service\"]\n        svc_reporting[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Reporting Service\"]\n    end\n\n    subgraph Data [ Data ]\n        db_postgres[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>PostgreSQL Database\"]\n        cache_redis[\"<img src='https://icons.terrastruct.com/dev%2Famazonwebservices.svg' width='48'/><br/>Redis Cache\"]\n    end\n    actor_customer -->|\"Submit Inquiry\"| ui_public_site\n    ext_call_center -->|\"Push Lead Data\"| svc_lead_capture\n    ui_public_site -->|\"Submit Form\"| svc_lead_capture\n    ui_in_store_kiosk -->|\"Enter Lead\"| svc_lead_capture\n    svc_lead_capture -->|\"Persist Lead (REQ001)\"| db_postgres\n    svc_lead_capture -->|\"Trigger Assignment\"| svc_lead_assignment\n    svc_lead_assignment -->|\"Query Inventory/Location (REQ002)\"| ext_erp\n    svc_lead_assignment -->|\"Update Assignment (REQ002)\"| db_postgres\n    svc_lead_assignment -->|\"Schedule Reminder\"| svc_notification\n    svc_notification -->|\"Queue Alert\"| cache_redis\n    svc_notification -->|\"Push Notification (REQ003)\"| ui_mobile_app\n    actor_sales_rep -->|\"Update Status\"| ui_mobile_app\n    ui_mobile_app -->|\"Update Lead (REQ005)\"| svc_lead_management\n    svc_lead_management -->|\"Save Interaction History (REQ005)\"| db_postgres\n    svc_reporting -->|\"Aggregate Metrics (REQ004)\"| db_postgres\n    svc_reporting -->|\"Sync Data\"| ext_marketing_analytics\n    actor_sales_manager -->|\"View Dashboard\"| ui_web_portal\n    ui_web_portal -->|\"Request Report\"| svc_reporting\n\n    %% Node Styling (critical path emphasized)\n    style actor_customer fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style actor_sales_rep fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style actor_sales_manager fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ext_erp fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ext_call_center fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ext_marketing_analytics fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ui_web_portal fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ui_public_site fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ui_in_store_kiosk fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style ui_mobile_app fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2\n    style svc_lead_capture fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2\n    style svc_lead_assignment fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2\n    style svc_lead_management fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style svc_notification fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2\n    style svc_reporting fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2\n    style db_postgres fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#7b1fa2\n    style cache_redis fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#7b1fa2",
+  "diagrams_py": "from diagrams import Diagram, Cluster, Edge\nfrom diagrams.custom import Custom\n\nwith Diagram(\"Lead Management for Automobile Dealership Research\", filename=\"architecture\", direction=\"LR\", outformat=\"png\", show=False, graph_attr={'fontsize': '16', 'bgcolor': 'white', 'pad': '0.5', 'rankdir': 'LR'}):\n\n    # Define connections",
+  "drawio_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<mxfile host=\"app.diagrams.net\" version=\"21.0\">\n  <diagram name=\"Cloud Architecture\" id=\"arch_pro\">\n    <mxGraphModel dx=\"2000\" dy=\"1200\" grid=\"1\" gridSize=\"10\" guides=\"1\" tooltips=\"1\" connect=\"1\" arrows=\"1\" background=\"#F8F9FA\">\n      <root>\n        <mxCell id=\"0\" />\n        <mxCell id=\"1\" parent=\"0\" />\n        <mxCell id=\"zone_presentation\" value=\"PRESENTATION LAYER\" style=\"swimlane;whiteSpace=wrap;html=1;startSize=30;collapsible=0;dashed=1;strokeColor=#1976D2;fillColor=#1976D20D;fontColor=#1976D2;fontStyle=1;\" vertex=\"1\" parent=\"1\">\n          <mxGeometry x=\"565.0\" y=\"60\" width=\"870\" height=\"240\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"100\" value=\"&lt;b&gt;Web Portal&lt;/b&gt;&lt;br/&gt;&lt;small&gt;React&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#1976D2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_presentation\">\n          <mxGeometry x=\"70.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"101\" value=\"&lt;b&gt;Public Website&lt;/b&gt;&lt;br/&gt;&lt;small&gt;React&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#1976D2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_presentation\">\n          <mxGeometry x=\"270.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"102\" value=\"&lt;b&gt;In-store Terminal&lt;/b&gt;&lt;br/&gt;&lt;small&gt;React&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#1976D2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_presentation\">\n          <mxGeometry x=\"470.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"103\" value=\"&lt;b&gt;Mobile App&lt;/b&gt;&lt;br/&gt;&lt;small&gt;iOS/Android&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#1976D2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_presentation\">\n          <mxGeometry x=\"670.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"zone_infrastructure\" value=\"INFRASTRUCTURE LAYER\" style=\"swimlane;whiteSpace=wrap;html=1;startSize=30;collapsible=0;dashed=1;strokeColor=#F57C00;fillColor=#F57C000D;fontColor=#F57C00;fontStyle=1;\" vertex=\"1\" parent=\"1\">\n          <mxGeometry x=\"665.0\" y=\"400\" width=\"670\" height=\"240\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"104\" value=\"&lt;b&gt;ERP System&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Legacy ERP&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#F57C00;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_infrastructure\">\n          <mxGeometry x=\"70.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"105\" value=\"&lt;b&gt;Call Center System&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Telephony API&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#F57C00;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_infrastructure\">\n          <mxGeometry x=\"270.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"106\" value=\"&lt;b&gt;Marketing Analytics System&lt;/b&gt;&lt;br/&gt;&lt;small&gt;BI Tool&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#F57C00;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_infrastructure\">\n          <mxGeometry x=\"470.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"zone_application\" value=\"APPLICATION LAYER\" style=\"swimlane;whiteSpace=wrap;html=1;startSize=30;collapsible=0;dashed=1;strokeColor=#7B1FA2;fillColor=#7B1FA20D;fontColor=#7B1FA2;fontStyle=1;\" vertex=\"1\" parent=\"1\">\n          <mxGeometry x=\"565.0\" y=\"740\" width=\"870\" height=\"400\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"107\" value=\"&lt;b&gt;Lead Capture Service&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Node.js&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_application\">\n          <mxGeometry x=\"70.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"108\" value=\"&lt;b&gt;Lead Assignment Service&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Node.js&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_application\">\n          <mxGeometry x=\"270.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"109\" value=\"&lt;b&gt;Lead Management API&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Node.js&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_application\">\n          <mxGeometry x=\"470.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"110\" value=\"&lt;b&gt;Notification Service&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Node.js/WebSockets&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_application\">\n          <mxGeometry x=\"670.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"111\" value=\"&lt;b&gt;Reporting Service&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Node.js&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#7B1FA2;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_application\">\n          <mxGeometry x=\"370.0\" y=\"215\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"zone_data\" value=\"DATA LAYER\" style=\"swimlane;whiteSpace=wrap;html=1;startSize=30;collapsible=0;dashed=1;strokeColor=#388E3C;fillColor=#388E3C0D;fontColor=#388E3C;fontStyle=1;\" vertex=\"1\" parent=\"1\">\n          <mxGeometry x=\"765.0\" y=\"1240\" width=\"470\" height=\"240\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"112\" value=\"&lt;b&gt;PostgreSQL Database&lt;/b&gt;&lt;br/&gt;&lt;small&gt;PostgreSQL&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#388E3C;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_data\">\n          <mxGeometry x=\"70.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"113\" value=\"&lt;b&gt;Redis Cache&lt;/b&gt;&lt;br/&gt;&lt;small&gt;Redis&lt;/small&gt;\" style=\"shape=label;whiteSpace=wrap;html=1;image=https://icons.terrastruct.com/dev%2Famazonwebservices.svg;imageWidth=40;imageHeight=40;fillColor=#ffffff;strokeColor=#388E3C;strokeWidth=2;verticalAlign=bottom;spacingBottom=10;imageAlign=center;imageVerticalAlign=top;spacingTop=45;rounded=1;arcSize=10;glass=0;\" vertex=\"1\" parent=\"zone_data\">\n          <mxGeometry x=\"270.0\" y=\"55\" width=\"130\" height=\"100\" as=\"geometry\" />\n        </mxCell>\n        <mxCell id=\"114\" value=\"Push Lead Data\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"105\" target=\"107\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"115\" value=\"Submit Form\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"101\" target=\"107\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"116\" value=\"Enter Lead\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"102\" target=\"107\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"117\" value=\"Persist Lead (REQ001)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"107\" target=\"112\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"118\" value=\"Trigger Assignment\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"107\" target=\"108\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"119\" value=\"Query Inventory/Location (REQ002)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"108\" target=\"104\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"120\" value=\"Update Assignment (REQ002)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"108\" target=\"112\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"121\" value=\"Schedule Reminder\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"108\" target=\"110\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"122\" value=\"Queue Alert\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"110\" target=\"113\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"123\" value=\"Push Notification (REQ003)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"110\" target=\"103\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"124\" value=\"Update Lead (REQ005)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"103\" target=\"109\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"125\" value=\"Save Interaction History (REQ005)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"109\" target=\"112\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"126\" value=\"Aggregate Metrics (REQ004)\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"111\" target=\"112\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"127\" value=\"Sync Data\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"111\" target=\"106\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n        <mxCell id=\"128\" value=\"Request Report\" style=\"edgeStyle=orthogonalEdgeStyle;rounded=1;curviness=12;html=1;strokeColor=#546E7A;strokeWidth=1.5;fontSize=10;fontColor=#37474F;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;\" edge=\"1\" parent=\"1\" source=\"100\" target=\"111\">\n          <mxGeometry relative=\"1\" as=\"geometry\"><mxPoint as=\"offset\" /></mxGeometry>\n        </mxCell>\n      </root>\n    </mxGraphModel>\n  </diagram>\n</mxfile>",
+  "d2_code": "direction: right\n\n# --- LAYERS ---\n\nActor: Actor {\n  style: {fill: \"#9b59b6\"; opacity: 0.1; stroke-dash: 3}\n\n  actor_customer: Customer {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  actor_sales_rep: Sales Representative {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  actor_sales_manager: Sales Manager {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n}\n\nInfrastructure: Infrastructure {\n  style: {fill: \"#9b59b6\"; opacity: 0.1; stroke-dash: 3}\n\n  ext_erp: ERP System {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  ext_call_center: Call Center System {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  ext_marketing_analytics: Marketing Analytics System {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n}\n\nPresentation: Presentation {\n  style: {fill: \"#9b59b6\"; opacity: 0.1; stroke-dash: 3}\n\n  ui_web_portal: Web Portal {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  ui_public_site: Public Website {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  ui_in_store_kiosk: In-store Terminal {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  ui_mobile_app: Mobile App {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n}\n\nApplication: Application {\n  style: {fill: \"#9b59b6\"; opacity: 0.1; stroke-dash: 3}\n\n  svc_lead_capture: Lead Capture Service {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  svc_lead_assignment: Lead Assignment Service {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  svc_lead_management: Lead Management API {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  svc_notification: Notification Service {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  svc_reporting: Reporting Service {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n}\n\nData: Data {\n  style: {fill: \"#9b59b6\"; opacity: 0.1; stroke-dash: 3}\n\n  db_postgres: PostgreSQL Database {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n  cache_redis: Redis Cache {\n    shape: image\n    icon: \"https://icons.terrastruct.com/dev%2Famazonwebservices.svg\"\n  }\n}\n\n# --- CONNECTIONS ---\n\nActor.actor_customer -> Presentation.ui_public_site: \"Submit Inquiry\"\nInfrastructure.ext_call_center -> Application.svc_lead_capture: \"Push Lead Data\"\nPresentation.ui_public_site -> Application.svc_lead_capture: \"Submit Form\"\nPresentation.ui_in_store_kiosk -> Application.svc_lead_capture: \"Enter Lead\"\nApplication.svc_lead_capture -> Data.db_postgres: \"Persist Lead (REQ001)\"\nApplication.svc_lead_capture -> Application.svc_lead_assignment: \"Trigger Assignment\"\nApplication.svc_lead_assignment -> Infrastructure.ext_erp: \"Query Inventory/Location (REQ002)\"\nApplication.svc_lead_assignment -> Data.db_postgres: \"Update Assignment (REQ002)\"\nApplication.svc_lead_assignment -> Application.svc_notification: \"Schedule Reminder\"\nApplication.svc_notification -> Data.cache_redis: \"Queue Alert\"\nApplication.svc_notification -> Presentation.ui_mobile_app: \"Push Notification (REQ003)\"\nActor.actor_sales_rep -> Presentation.ui_mobile_app: \"Update Status\"\nPresentation.ui_mobile_app -> Application.svc_lead_management: \"Update Lead (REQ005)\"\nApplication.svc_lead_management -> Data.db_postgres: \"Save Interaction History (REQ005)\"\nApplication.svc_reporting -> Data.db_postgres: \"Aggregate Metrics (REQ004)\"\nApplication.svc_reporting -> Infrastructure.ext_marketing_analytics: \"Sync Data\"\nActor.actor_sales_manager -> Presentation.ui_web_portal: \"View Dashboard\"\nPresentation.ui_web_portal -> Application.svc_reporting: \"Request Report\"",
+  "d3_json": {
+    "title": "Lead Management for Automobile Dealership Research",
+    "nodes": [
+      {
+        "id": "actor_customer",
+        "label": "Customer",
+        "technology": "User",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Actor",
+        "color": "#999999",
+        "group": "Actor",
+        "index": 0
+      },
+      {
+        "id": "actor_sales_rep",
+        "label": "Sales Representative",
+        "technology": "User",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Actor",
+        "color": "#999999",
+        "group": "Actor",
+        "index": 1
+      },
+      {
+        "id": "actor_sales_manager",
+        "label": "Sales Manager",
+        "technology": "User",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Actor",
+        "color": "#999999",
+        "group": "Actor",
+        "index": 2
+      },
+      {
+        "id": "ext_erp",
+        "label": "ERP System",
+        "technology": "Legacy ERP",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Infrastructure",
+        "color": "#999999",
+        "group": "Infrastructure",
+        "index": 3
+      },
+      {
+        "id": "ext_call_center",
+        "label": "Call Center System",
+        "technology": "Telephony API",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Infrastructure",
+        "color": "#999999",
+        "group": "Infrastructure",
+        "index": 4
+      },
+      {
+        "id": "ext_marketing_analytics",
+        "label": "Marketing Analytics System",
+        "technology": "BI Tool",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Infrastructure",
+        "color": "#999999",
+        "group": "Infrastructure",
+        "index": 5
+      },
+      {
+        "id": "ui_web_portal",
+        "label": "Web Portal",
+        "technology": "React",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Presentation",
+        "color": "#999999",
+        "group": "Presentation",
+        "index": 6
+      },
+      {
+        "id": "ui_public_site",
+        "label": "Public Website",
+        "technology": "React",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Presentation",
+        "color": "#999999",
+        "group": "Presentation",
+        "index": 7
+      },
+      {
+        "id": "ui_in_store_kiosk",
+        "label": "In-store Terminal",
+        "technology": "React",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Presentation",
+        "color": "#999999",
+        "group": "Presentation",
+        "index": 8
+      },
+      {
+        "id": "ui_mobile_app",
+        "label": "Mobile App",
+        "technology": "iOS/Android",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Presentation",
+        "color": "#999999",
+        "group": "Presentation",
+        "index": 9
+      },
+      {
+        "id": "svc_lead_capture",
+        "label": "Lead Capture Service",
+        "technology": "Node.js",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Application",
+        "color": "#999999",
+        "group": "Application",
+        "index": 10
+      },
+      {
+        "id": "svc_lead_assignment",
+        "label": "Lead Assignment Service",
+        "technology": "Node.js",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Application",
+        "color": "#999999",
+        "group": "Application",
+        "index": 11
+      },
+      {
+        "id": "svc_lead_management",
+        "label": "Lead Management API",
+        "technology": "Node.js",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Application",
+        "color": "#999999",
+        "group": "Application",
+        "index": 12
+      },
+      {
+        "id": "svc_notification",
+        "label": "Notification Service",
+        "technology": "Node.js/WebSockets",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Application",
+        "color": "#999999",
+        "group": "Application",
+        "index": 13
+      },
+      {
+        "id": "svc_reporting",
+        "label": "Reporting Service",
+        "technology": "Node.js",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Application",
+        "color": "#999999",
+        "group": "Application",
+        "index": 14
+      },
+      {
+        "id": "db_postgres",
+        "label": "PostgreSQL Database",
+        "technology": "PostgreSQL",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Data",
+        "color": "#999999",
+        "group": "Data",
+        "index": 15
+      },
+      {
+        "id": "cache_redis",
+        "label": "Redis Cache",
+        "technology": "Redis",
+        "icon": "https://icons.terrastruct.com/dev%2Famazonwebservices.svg",
+        "layer": "Data",
+        "color": "#999999",
+        "group": "Data",
+        "index": 16
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 7,
+        "label": "Submit Inquiry",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 4,
+        "target": 10,
+        "label": "Push Lead Data",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 7,
+        "target": 10,
+        "label": "Submit Form",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 8,
+        "target": 10,
+        "label": "Enter Lead",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 10,
+        "target": 15,
+        "label": "Persist Lead (REQ001)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 10,
+        "target": 11,
+        "label": "Trigger Assignment",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 11,
+        "target": 3,
+        "label": "Query Inventory/Location (REQ002)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 11,
+        "target": 15,
+        "label": "Update Assignment (REQ002)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 11,
+        "target": 13,
+        "label": "Schedule Reminder",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 13,
+        "target": 16,
+        "label": "Queue Alert",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 13,
+        "target": 9,
+        "label": "Push Notification (REQ003)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 1,
+        "target": 9,
+        "label": "Update Status",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 9,
+        "target": 12,
+        "label": "Update Lead (REQ005)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 12,
+        "target": 15,
+        "label": "Save Interaction History (REQ005)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 14,
+        "target": 15,
+        "label": "Aggregate Metrics (REQ004)",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 14,
+        "target": 5,
+        "label": "Sync Data",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 2,
+        "target": 6,
+        "label": "View Dashboard",
+        "type": "unidirectional",
+        "value": 1
+      },
+      {
+        "source": 6,
+        "target": 14,
+        "label": "Request Report",
+        "type": "unidirectional",
+        "value": 1
+      }
+    ],
+    "metadata": {
+      "nodeCount": 17,
+      "linkCount": 18,
+      "layers": [
+        "Application",
+        "Actor",
+        "Infrastructure",
+        "Data",
+        "Presentation"
+      ]
+    }
+  },
+  "suggestions": [],
+  "iterations": 1
+}
